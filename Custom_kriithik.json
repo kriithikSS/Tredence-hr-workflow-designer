@@ -1,0 +1,216 @@
+{
+  "title": "Employee Onboarding",
+  "nodes": [
+    {
+      "id": "s1",
+      "type": "start",
+      "position": {
+        "x": 380,
+        "y": 40
+      },
+      "data": {
+        "type": "start",
+        "label": "New Hire Onboarding",
+        "triggerType": "manual",
+        "metadata": [],
+        "validationErrors": []
+      },
+      "measured": {
+        "width": 270,
+        "height": 79
+      }
+    },
+    {
+      "id": "t1",
+      "type": "task",
+      "position": {
+        "x": 380,
+        "y": 210
+      },
+      "data": {
+        "type": "task",
+        "label": "Collect Documents",
+        "description": "Gather required employee documents",
+        "assignee": "HR Admin",
+        "dueDate": "",
+        "priority": "high",
+        "customFields": [],
+        "validationErrors": []
+      },
+      "measured": {
+        "width": 270,
+        "height": 109
+      }
+    },
+    {
+      "id": "a1",
+      "type": "approval",
+      "position": {
+        "x": 380,
+        "y": 390
+      },
+      "data": {
+        "type": "approval",
+        "label": "Manager Sign-off",
+        "approverRole": "Manager",
+        "autoApproveThreshold": 3,
+        "rejectionLabel": "Return to HR",
+        "validationErrors": [],
+        "useGlobalProbability": false
+      },
+      "measured": {
+        "width": 270,
+        "height": 145
+      },
+      "selected": false
+    },
+    {
+      "id": "au1",
+      "type": "automated",
+      "position": {
+        "x": 380,
+        "y": 590
+      },
+      "data": {
+        "type": "automated",
+        "label": "Send Welcome Email",
+        "actionId": "send_email",
+        "actionParams": {
+          "to": "new.hire@company.com",
+          "subject": "Welcome!"
+        },
+        "onFailure": "retry",
+        "validationErrors": []
+      },
+      "measured": {
+        "width": 270,
+        "height": 90
+      }
+    },
+    {
+      "id": "au2",
+      "type": "automated",
+      "position": {
+        "x": 380,
+        "y": 760
+      },
+      "data": {
+        "type": "automated",
+        "label": "Update HRIS Record",
+        "actionId": "update_hris",
+        "actionParams": {
+          "field": "status",
+          "value": "active"
+        },
+        "onFailure": "stop",
+        "validationErrors": []
+      },
+      "measured": {
+        "width": 270,
+        "height": 90
+      },
+      "selected": false
+    },
+    {
+      "id": "e1",
+      "type": "end",
+      "position": {
+        "x": 380,
+        "y": 930
+      },
+      "data": {
+        "type": "end",
+        "label": "Onboarding Complete",
+        "endMessage": "Employee successfully onboarded.",
+        "sendSummary": true,
+        "summaryRecipients": "hr@company.com",
+        "validationErrors": []
+      },
+      "measured": {
+        "width": 270,
+        "height": 110
+      }
+    },
+    {
+      "id": "task-1776587217029",
+      "type": "task",
+      "position": {
+        "x": 823.1851800310851,
+        "y": 401.5217217637452
+      },
+      "data": {
+        "type": "task",
+        "label": "Correct Files and resubkit",
+        "description": "",
+        "assignee": "Emplyee",
+        "dueDate": "",
+        "priority": "medium",
+        "customFields": [],
+        "validationErrors": []
+      },
+      "measured": {
+        "width": 270,
+        "height": 109
+      },
+      "selected": false,
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "source": "s1",
+      "target": "t1",
+      "animated": true,
+      "type": "custom"
+    },
+    {
+      "id": "e2",
+      "source": "t1",
+      "target": "a1",
+      "animated": true,
+      "type": "custom"
+    },
+    {
+      "id": "e3",
+      "source": "a1",
+      "target": "au1",
+      "animated": true,
+      "type": "custom",
+      "sourceHandle": "approved",
+      "label": "Approved"
+    },
+    {
+      "id": "e4",
+      "source": "au1",
+      "target": "au2",
+      "animated": true,
+      "type": "custom"
+    },
+    {
+      "id": "e5",
+      "source": "au2",
+      "target": "e1",
+      "animated": true,
+      "type": "custom"
+    },
+    {
+      "type": "custom",
+      "animated": true,
+      "source": "a1",
+      "sourceHandle": "rejected",
+      "target": "task-1776587217029",
+      "targetHandle": null,
+      "id": "e-1776587250626"
+    },
+    {
+      "type": "custom",
+      "animated": true,
+      "source": "task-1776587217029",
+      "sourceHandle": null,
+      "target": "a1",
+      "targetHandle": null,
+      "id": "e-1776587254825"
+    }
+  ]
+}
